@@ -236,10 +236,8 @@ WHERE name = 'shared_buffers';
 
 ### ผลการทดลอง
 ```
-1.<img width="969" height="181" alt="image" src="https://github.com/user-attachments/assets/ff0fd6c3-6fd8-420b-85f6-ecac580609a6" />
+<img width="969" height="181" alt="image" src="https://github.com/user-attachments/assets/ff0fd6c3-6fd8-420b-85f6-ecac580609a6" />
 
-2. ค่า  shared_buffers มีการกำหนดค่าไว้เท่าไหร่ (ใช้ setting X unit)
-3. ค่า  pending_restart ในผลการทดลองมีค่าเป็นอย่างไร และมีความหมายอย่างไร
 ```
 -- คำนวณและตั้งค่าใหม่
 -- สำหรับระบบ 2GB: 512MB (25%)
@@ -284,11 +282,10 @@ FROM pg_settings
 WHERE name = 'work_mem';
 ```
 ### ผลการทดลอง
-```
-รูปผลการเปลี่ยนแปลงค่า work_mem
+
+
 <img width="550" height="170" alt="image" src="https://github.com/user-attachments/assets/429355af-53c1-4a69-a5ae-8c1b4549bd54" />
 
-```
 
 #### 3.3 ปรับแต่ง Maintenance Work Memory
 ```sql
@@ -380,11 +377,11 @@ WHERE name IN (
 ORDER BY name;
 ```
 ### ผลการทดลอง
-```
-รูปผลการลัพธ์การตั้งค่า
+
+
 <img width="998" height="118" alt="image" src="https://github.com/user-attachments/assets/84413512-9127-4711-a6ad-43968e3088ec" />
 
-```
+
 
 ### Step 5: การสร้างและทดสอบ Workload
 
@@ -426,7 +423,7 @@ ORDER BY data
 LIMIT 1000;
 ```
 ### ผลการทดลอง
-```
+
 <img width="960" height="246" alt="image" src="https://github.com/user-attachments/assets/b8615668-8a6a-4ca1-a512-992fa918e290" />
 
 1. คำสั่ง EXPLAIN(ANALYZE,BUFFERS) คืออะไร 
@@ -444,13 +441,12 @@ LIMIT 100;
 ```
 
 ### ผลการทดลอง
-```
-1. รูปผลการรัน
+
+
 <img width="943" height="253" alt="image" src="https://github.com/user-attachments/assets/fbafaeb0-f693-4242-be6e-4d3a4e5e2f59" />
 
-2. อธิบายผลลัพธ์ที่ได้ 
-3. การสแกนเป็นแบบใด เกิดจากเหตุผลใด
-```
+
+
 #### 5.3 การทดสอบ Maintenance Work Memory
 ```sql
 -- ทดสอบ CREATE INDEX (จะใช้ maintenance_work_mem)
@@ -465,12 +461,9 @@ DELETE FROM large_table WHERE id % 10 = 0;
 VACUUM (ANALYZE, VERBOSE) large_table;
 ```
 ### ผลการทดลอง
-```
-1. รูปผลการทดลอง จากคำสั่ง VACUUM (ANALYZE, VERBOSE) large_table;
+
 <img width="1006" height="572" alt="image" src="https://github.com/user-attachments/assets/2237a3cc-eb01-449e-bc6e-c94e23b50397" />
 
-2. อธิบายผลลัพธ์ที่ได้
-```
 ### Step 6: การติดตาม Memory Usage
 
 #### 6.1 สร้างฟังก์ชันติดตาม Memory
@@ -511,10 +504,10 @@ SELECT
 FROM get_memory_usage();
 ```
 ### ผลการทดลอง
-```
+
 <img width="779" height="243" alt="image" src="https://github.com/user-attachments/assets/c5fe9ca5-741a-4c96-a21d-45a39a9bf00d" />
 
-```
+
 
 #### 6.2 การติดตาม Buffer Hit Ratio
 ```sql
@@ -533,11 +526,9 @@ WHERE heap_blks_read + heap_blks_hit > 0
 ORDER BY heap_blks_read + heap_blks_hit DESC;
 ```
 ### ผลการทดลอง
-```
-1. รูปผลการทดลอง
+
 <img width="781" height="68" alt="image" src="https://github.com/user-attachments/assets/b64e928b-d622-4dae-8912-2371cf09e1e7" />
-2. อธิบายผลลัพธ์ที่ได้
-```
+
 #### 6.3 ดู Buffer Hit Ratio ทั้งระบบ
 ```sql
 SELECT datname,
@@ -548,12 +539,8 @@ FROM pg_stat_database
 WHERE datname = current_database();
 ```
 ### ผลการทดลอง
-```
-1. รูปผลการทดลอง
-<img width="858" height="59" alt="image" src="https://github.com/user-attachments/assets/fafb660e-c316-4070-a3d5-70635f22d1b7" />
 
-2. อธิบายผลลัพธ์ที่ได้
-```
+<img width="858" height="59" alt="image" src="https://github.com/user-attachments/assets/fafb660e-c316-4070-a3d5-70635f22d1b7" />
 
 #### 6.4 ดู Table ที่มี Disk I/O มาก
 ```sql
@@ -571,12 +558,9 @@ ORDER BY heap_blks_read DESC
 LIMIT 10;
 ```
 ### ผลการทดลอง
-```
-1. รูปผลการทดลอง
+
 <img width="1005" height="221" alt="image" src="https://github.com/user-attachments/assets/81876e6a-8f31-4fc4-bb3c-71de17478fb3" />
 
-2. อธิบายผลลัพธ์ที่ได้
-```
 ### Step 7: การปรับแต่ง Autovacuum
 
 #### 7.1 ทำความเข้าใจ Autovacuum Parameters
@@ -588,12 +572,8 @@ WHERE name LIKE '%autovacuum%'
 ORDER BY name;
 ```
 ### ผลการทดลอง
-```
-1. รูปผลการทดลอง
-<img width="636" height="70" alt="image" src="https://github.com/user-attachments/assets/ab117f2e-ea4b-43a4-bbeb-2898f38462e2" />
 
-2. อธิบายค่าต่าง ๆ ที่มีความสำคัญ
-```
+<img width="636" height="70" alt="image" src="https://github.com/user-attachments/assets/ab117f2e-ea4b-43a4-bbeb-2898f38462e2" />
 
 #### 7.2 การปรับแต่ง Autovacuum สำหรับประสิทธิภาพ
 ```sql
@@ -620,10 +600,8 @@ ALTER SYSTEM SET autovacuum_work_mem = '512MB';
 SELECT pg_reload_conf();
 ```
 ### ผลการทดลอง
-```
-<img width="688" height="137" alt="image" src="https://github.com/user-attachments/assets/90596e1d-7d02-4c8e-8814-7902f1adb532" />
 
-```
+<img width="688" height="137" alt="image" src="https://github.com/user-attachments/assets/90596e1d-7d02-4c8e-8814-7902f1adb532" />
 
 ### Step 8: Performance Testing และ Benchmarking
 
@@ -696,13 +674,8 @@ FROM performance_results
 ORDER BY test_timestamp DESC;
 ```
 ### ผลการทดลอง
-```
-1. รูปผลการทดลอง
+
 <img width="314" height="301" alt="image" src="https://github.com/user-attachments/assets/11f4a855-3bde-44a0-98a9-66c85e658e74" />
-
-2. อธิบายผลลัพธ์ที่ได้
-```
-
 
 ### Step 9: การ Monitoring และ Alerting
 
@@ -735,10 +708,8 @@ FROM pg_settings WHERE name = 'maintenance_work_mem';
 SELECT * FROM memory_monitor;
 ```
 ### ผลการทดลอง
-```
-<img width="655" height="154" alt="image" src="https://github.com/user-attachments/assets/36afda4a-9284-4b93-be40-570c1977b14c" />
 
-```
+<img width="655" height="154" alt="image" src="https://github.com/user-attachments/assets/36afda4a-9284-4b93-be40-570c1977b14c" />
 
 ### Step 10: การจำลอง Load Testing
 
@@ -785,10 +756,10 @@ CREATE INDEX idx_orders_product_id ON load_test_orders(product_id);
 CREATE INDEX idx_orders_date ON load_test_orders(order_date);
 ```
 ### ผลการทดลอง
-```
+
 <img width="311" height="296" alt="image" src="https://github.com/user-attachments/assets/ba728521-dfd2-4077-b463-3a1b9647f6cd" />
 
-```
+
 
 #### 10.2 การทดสอบ Query Performance
 ```sql
@@ -963,10 +934,9 @@ SELECT * FROM simulate_oltp_workload(25);
 
 ```
 ### ผลการทดลอง
-```
+
 <img width="641" height="130" alt="image" src="https://github.com/user-attachments/assets/c531b50a-d656-4eb3-947a-4f1a1555740a" />
 
-```
 -- ทดสอบปานกลาง  
 SELECT * FROM simulate_oltp_workload(100);
 ### ผลการทดลอง
@@ -975,15 +945,8 @@ SELECT * FROM simulate_oltp_workload(100);
 <img width="639" height="133" alt="image" src="https://github.com/user-attachments/assets/97a1fb8b-f6b7-402e-b05d-083fe892435d" />
 
 2. อธิบายผลการทดลอง การ SELECT , INSERT, UPDATE, DELETE เป็นอย่างไร 
-```
 
--- ทดสอบหนักขึ้น เครื่องใครไม่ไหวผ่านก่อน หรือเปลี่ยนค่า 500 เป็น 200 :)
-SELECT * FROM simulate_oltp_workload(500);
-### ผลการทดลอง
-```
 <img width="646" height="160" alt="image" src="https://github.com/user-attachments/assets/d25cccfa-f663-4e69-b05b-e8164fefe29f" />
-
-```
 
 ### Step 11: การเปรียบเทียบประสิทธิภาพ
 
@@ -1176,10 +1139,8 @@ $$ LANGUAGE plpgsql;
 SELECT * FROM run_benchmark_suite();
 ```
 ### ผลการทดลอง
-```
-<img width="678" height="190" alt="image" src="https://github.com/user-attachments/assets/32a9aedb-a605-40cd-bd16-bc74c72ebfd6" />
 
-```
+<img width="678" height="190" alt="image" src="https://github.com/user-attachments/assets/32a9aedb-a605-40cd-bd16-bc74c72ebfd6" />
 
 -- ดูผลการทดสอบ
 SELECT 
@@ -1478,10 +1439,10 @@ WHERE heap_blks_read + heap_blks_hit > 0
 ORDER BY hit_ratio;
 ```
 ### ผลการทดลอง
-```
+
 <img width="616" height="213" alt="image" src="https://github.com/user-attachments/assets/d32db8cf-211e-4a3b-94dc-0dde4ab5767e" />
 
-```
+
 
 ### การคำนวณ Memory Requirements
 
